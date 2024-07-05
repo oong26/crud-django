@@ -5,7 +5,8 @@ from django.views import View
 # Create your views here.
 class RegisterView(View):
     def get(self, request):
-        return render(request, 'authentication/register.html')
+        data = {'title': 'Register'}
+        return render(request, 'authentication/register.html', data)
 
 class LoginView(View):
     def get(self, request):
