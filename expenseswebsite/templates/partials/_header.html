@@ -2,7 +2,10 @@
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">Company name</a>
     <ul class="navbar-nav px-3 flex-row">
         <li class="nav-item text-nowrap">
-            <a href="#" class="nav-link px-3 text-white">Sign Out</a>
+            <form action="{% url "logout" %}" method="post">
+                {% csrf_token %}
+                <input type="submit" class="nav-link px-3 text-white" value="Sign Out">
+            </form>
         </li>
         <li class="nav-item text-nowrap d-md-none">
             <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
