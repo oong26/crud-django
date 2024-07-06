@@ -9,15 +9,35 @@ from django.contrib import messages
 # Create your views here.
 class RegisterView(View):
     def get(self, request):
-        data = {'title': 'Register'}
+        context = {'title': 'Register'}
 
-        return render(request, 'authentication/register.html', data)
+        return render(request, 'authentication/register.html', context)
 
     def post(self, request):
-        data = {'title': 'Register'}
-        messages.success(request, 'Success')
+        context = {
+            'title': 'Register',
+            'fieldValues': request.POST
+        }
+        # GET USER DATA
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
 
-        return render(request, 'authentication/register.html', data)
+        # VALIDATE
+        if not User.objects.filter(username=username).exists():
+            if not User.objects.filter(email=email).exists():
+                if len(password) < 8:
+                    messages.warning(request, 'Password must have a minimum of 8 characters')
+                    return render(request, 'authentication/register.html', context)
+
+                # Store a user account
+                user = User.objects.create_user(username=username, email=email, password=password)
+                user.save()
+
+                messages.success(request, 'Registrations successfully')
+                return render(request, 'authentication/register.html', context)
+
+        return render(request, 'authentication/register.html', context)
 
 class UsernameValidationView(View):
     def post(self, request):
