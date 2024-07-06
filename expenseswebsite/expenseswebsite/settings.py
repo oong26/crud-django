@@ -132,3 +132,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())
+
+# Configure message tag
+from django.contrib import messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}

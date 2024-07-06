@@ -12,6 +12,7 @@
                         <p class="m-0 fs-4">{{ title }}</p>
                         <small>Please complete the form to finish the registration.</small>
                     </div>
+                    {% include "partials/_messages.html" %}
                     <div class="form-group mt-3">
                         <label for="username">Username<span class="text-danger">*</span></label>
                         <input type="text" name="username" id="username"
